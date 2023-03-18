@@ -16,45 +16,40 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-
-        Role::create([
+        // admin
+        $role = Role::create([
             'nama' => 'admin'
         ]);
-
-        Role::create([
-            'nama' => 'karyawan'
-        ]);
-
-        Role::create([
-            'nama' => 'konsumen'
-        ]);
-
-        User::create([ 
+      
+        $user = User::create([ 
             'name' => 'admin',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('123123123'),
-            'role_id' => 1
+            'role_id' => $role->id
         ]);
 
-        User::create([
+        // karyawan
+        $role = Role::create([
+            'nama' => 'karyawan'
+        ]);
+
+        $user = User::create([
             'name' => 'karyawan',
             'email' => 'karyawan@gmail.com',
             'password' => bcrypt('123123123'),
-            'role_id' => 2
+            'role_id' => $role->id
         ]);
 
-        User::create([
-            'name' => 'konsumen',
-            'email' => 'konsumen@gmail.com',
-            'password' => bcrypt('123123123'),
-            'role_id' => 3
-        ]);
-
-     
         Karyawan::create([
-            'user_id' => 1,
+            'user_id' => $user->id,
             'hp' => '088976068844',
             'alamat' => 'batutulis',
         ]);
+
+        //konsumen
+        $role = Role::create([
+            'nama' => 'konsumen'
+        ]);
+        
     }
 }
